@@ -3,6 +3,7 @@ body {
     padding: 0;
     margin: 0;
     background: #0c0f14;
+    overflow-x: hidden;
 }
 
 ::selection {
@@ -25,12 +26,14 @@ body {
     }
 
     .footer {
+        z-index: 10;
         display: flex;
         justify-content: space-between;
         align-items: center;
         width: 100%;
         height: 84px;
         border-top: 1px solid #afccff;
+        background-color: #0c0f14;
 
         a,
         button {
@@ -58,6 +61,82 @@ body {
                 color: #0c0f14;
                 background: #afccff;
             }
+
+            &.active {
+                color: #0c0f14;
+                background-color: #afccff;
+            }
+        }
+
+        .dashboard-login-board {
+            position: absolute;
+            border-left: solid 1px #afccff;
+            border-top: solid 1px #afccff;
+            border-bottom: solid 1px #afccff;
+            background: #0c0f14;
+            right: 0;
+            bottom: 84px;
+            width: 400px;
+            height: 196px;
+
+            z-index: -1;
+
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(196px);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            height: 100px;
+
+            &.active {
+                opacity: 1;
+                pointer-events: auto;
+                transform: translateY(0px);
+            }
+
+            div {
+                margin: 24px;
+                width: 100%;
+                display: flex;
+                gap: 8px;
+
+                input {
+                    flex: 1;
+                    background-color: #0c0f14;
+                    border: 1px solid #afccff;
+                    margin: 4px;
+                    padding: 6px 8px;
+                    outline: none;
+                    opacity: 0.45;
+                    text-transform: uppercase;
+
+                    transition: 0.2s;
+
+                    &:focus {
+                        opacity: 1;
+                    }
+                }
+
+                button {
+                    margin: 4px;
+                    display: inline-block;
+                    background: #0c0f14;
+                    border: 1px solid #afccff;
+                    padding: 6px 8px;
+
+                    opacity: 0.45;
+
+                    transition: 0.2s;
+
+                    &:hover {
+                        opacity: 1;
+                        background-color: #afccff;
+                        color: #0c0f14;
+                    }
+                }
+            }
+
         }
     }
 }
