@@ -18,9 +18,15 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxt/image',
-    '@nuxt/ui',
     '@nuxt/fonts',
     '@nuxt/icon',
     '@nuxt/scripts'
-  ]
+  ],
+  fonts:
+  {
+    defaults: {
+      weights: [300, 400, 500, 600, 700, 800],
+      styles: ['normal', 'italic']
+    }
+  }
 })
