@@ -1,0 +1,7 @@
+# Phantasia development hosts
+# place inside /etc/hosts
+127.0.0.1 uwu.local
+127.0.0.1 api.uwu.local
+127.0.0.1 analytics.uwu.local
+127.0.0.1 cdn.uwu.local
+127.0.0.1 i.uwu.local
