@@ -33,3 +33,13 @@ cd api
 pip install -r requirements.txt
 uvicorn src.main:app --reload
 ```
+
+### Nginx Setup
+
+#### Production
+
+Point `uwu.so`, `www.uwu.so`, `i.uwu.so` and `api.uwu.so` to the server.
+
+#### Staging
+
+Point `staging.uwu.so`, `i.staging.uwu.so` and `api.staging.uwu.so` to the server.

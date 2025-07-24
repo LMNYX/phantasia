@@ -14,11 +14,11 @@ services:
       dockerfile: ./Dockerfile
     container_name: phantasia-api
     restart: unless-stopped
-  
+
   phantasia-nginx:
     image: nginx:1.29.0-alpine
     container_name: phantasia-nginx
-    restart: unless-stopped
+    restart: always
     ports:
       - 80:80
     volumes:
@@ -26,6 +26,49 @@ services:
     depends_on:
       - phantasia-frontend
       - phantasia-api
+      - seaweed-s3
+
+  seaweed-master:
+    image: chrislusf/seaweedfs
+    container_name: seaweed-master
+    command: "master -ip=seaweed-master -port=9333"
+    restart: unless-stopped
+
+  seaweed-volume:
+    image: chrislusf/seaweedfs
+    container_name: seaweed-volume
+    command: "volume -max=5 -ip=seaweed-volume -port=8080 -mserver=seaweed-master:9333"
+    volumes:
+      - seaweed_data:/data
+    depends_on:
+      - seaweed-master
+    restart: unless-stopped
+
+  seaweed-filer:
+    image: chrislusf/seaweedfs
+    container_name: seaweed-filer
+    command: "filer -master=seaweed-master:9333"
+    restart: unless-stopped
+    depends_on:
+      - seaweed-master
+    ports:
+      - "8888:8888"
+      - "18888:18888"
+
+  seaweed-s3:
+    image: chrislusf/seaweedfs
+    container_name: seaweed-s3
+    command: "s3 -filer=seaweed-filer:8888 -port=8333"
+    restart: unless-stopped
+    depends_on:
+      - seaweed-filer
+    expose:
+      - "8333"
+      - "19333"
+    environment:
+      - AWS_ACCESS_KEY_ID=REPLACETHISWITHSOMETHINGSECURE
+      - AWS_SECRET_ACCESS_KEY=REPLACETHISWITHSOMETHINGSECURE
 
 volumes:
   db:
+  seaweed_data:
