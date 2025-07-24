@@ -36,6 +36,10 @@ uvicorn src.main:app --reload
 
 ### Nginx Setup
 
+- `@` / `www` - frontend (TypeScript/Nuxt);
+- `api` - API interface (Python/FastAPI);
+- `i` - Filesystem (SeaweedFS/S3).
+
 #### Production
 
 Point `uwu.so`, `www.uwu.so`, `i.uwu.so` and `api.uwu.so` to the server.
