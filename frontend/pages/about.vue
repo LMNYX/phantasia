@@ -14,6 +14,7 @@
       <h2>Early contributors</h2>
       <p>Thanks to doritorainn, <NuxtLink to="https://m.twitch.tv/nephraa/home">Nephraa</NuxtLink>, <NuxtLink to="https://github.com/clevernt/">clever(nt)</NuxtLink>, <NuxtLink to="https://x.com/kanuiosu">kanui</NuxtLink>, UYCactus, <NuxtLink to="https://pavel.gg">NekoPavel</NuxtLink>, <NuxtLink to="https://www.twitch.tv/kexiv_">Kexiv</NuxtLink> and others for initially using the service and testing it!</p>
       <br>
+      <p><span class="v-a">powered by</span><Icon class="v-a icon" name="mdi:soundcloud" /><span class="v-a">bangers</span></p>
     </div>
 </template>
 
@@ -21,6 +22,17 @@
 
 </script>
 
-<style>
+<style lang="scss" scoped>
+.v-a
+{
+  cursor: default;
+  user-select: none;
+  vertical-align: middle;
 
+  &.icon
+  {
+    margin: 0 6px;
+    color: #ff5500;
+  }
+}
 </style>

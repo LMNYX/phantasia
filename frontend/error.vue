@@ -12,7 +12,7 @@ const props = defineProps({
             <div class="main-page-content">
                 <h1>{{error.statusCode}}</h1>
                 <p>There has been an error trying to get this page!</p>
-                <p>{{error}}</p>
+                <p>{{error.message}}</p>
             </div>
         </div>
     </main>

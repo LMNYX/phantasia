@@ -9,12 +9,14 @@
       <p>Please contact <NuxtLink to="mailto:me@reze.moe">me@reze.moe</NuxtLink> (me@reze.moe) with a <b>[DMCA]</b> in the subject. Attach any proof of ownership of the material and infringing links.</p>
       <h2>Can I get access?</h2>
       <p>If you have to ask, no.</p>
+      <h2>Can I support you?</h2>
+      <p>Yes. Visit <NuxtLink to="https://mishashto.com/donate">this page</NuxtLink> to learn more.</p>
       <h2>Why is it down or slow sometimes?</h2>
       <p>Downtime is as rare as we can possibly get, excluding the daily morning restart (Sweden morning). Slowness may be due to Telia being morons or you're far away from Sweden. If you want to contribute to stability, please inquire with <NuxtLink to="https://pavel.gg">NekoPavel</NuxtLink> on how you can donate.</p>
       <h2>Can I read Privacy Policy or Terms of Service?</h2>
       <p>I use the same terms of service for all my projects. You can read them <NuxtLink to="https://mishashto.com/terms">here</NuxtLink>.</p>
       <h2>Is this open-source?</h2>
-      <p>Yes. Since September 19th, 2023. Please look at <NuxtLink to="https://github.com/orgs/GoofyGoofsterClub/repositories">our GitHub organization's</NuxtLinK> repositories.</p>
+      <p>Imagination Server is open-source Since September 19th, 2023. Please look at <NuxtLink to="https://github.com/orgs/GoofyGoofsterClub/repositories">our GitHub organization's</NuxtLinK> repositories. Phantasia Media Uploader is yet to be public.</p>
       <h2>Is there public API?</h2>
       <p>Not yet.</p>
       <h2>Is there file size limit?</h2>
