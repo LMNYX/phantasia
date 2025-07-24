@@ -5,9 +5,9 @@ Heavily opinionated image and file uploader server, built with Nuxt and FastAPI.
 ## Dependencies
 
 1. NodeJs + pnpm/npm
-2. Docker
-3. PostgreSQL
-4. Brain
+2. Python
+3. Docker
+4. PostgreSQL
 
 ## Contributing
 
@@ -17,7 +17,7 @@ For code standards use the config provided for `Prettier`.
 
 ## Setup
 
-Make sure to install dependencies:
+Make sure to install dependencies.
 
 ```bash
 #  Install NodeJS, Python, PostgreSQL.
