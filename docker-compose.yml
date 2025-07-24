@@ -14,6 +14,7 @@ services:
       dockerfile: ./Dockerfile
     container_name: phantasia-api
     restart: unless-stopped
+  
   phantasia-nginx:
     image: nginx:1.29.0-alpine
     container_name: phantasia-nginx
