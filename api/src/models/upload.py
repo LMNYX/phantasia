@@ -20,3 +20,6 @@ class Upload(Model):
 
     def get_bucket_location(self):
         return f"{self.user.username}/{self.internal_name}"
+
+    class Meta:
+        table = "uploads"
