@@ -24,4 +24,4 @@ USER appuser
 EXPOSE 4444
 
 # During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
-CMD sh -c "aerich init-db || aerich upgrade && uvicorn src.main:app --host 0.0.0.0 --port 4444"
+CMD sh -c "aerich upgrade && uvicorn src.main:app --host 0.0.0.0 --port 4444"
