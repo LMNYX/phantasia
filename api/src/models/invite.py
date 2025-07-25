@@ -1,4 +1,3 @@
-import hashlib
 from tortoise import fields
 from tortoise.models import Model
 from src.models.user import User
