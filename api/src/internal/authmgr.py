@@ -35,7 +35,7 @@ def requires_auth(permissions_required: List[str] | None = None):
         async def _check_permissions(user: User = Depends(_get_current_user)):
             if permissions_required:
                 user_permissions = getattr(user, 'permissions', [])
-                if not all(p in user_permissions for p in permissions_required):
+                if "SUPERUSER" not in user_permissions and not all(p in user_permissions for p in permissions_required):
                     raise HTTPException(
                         status_code=status.HTTP_403_FORBIDDEN,
                         detail="You do not have sufficient permissions to perform this action.",
