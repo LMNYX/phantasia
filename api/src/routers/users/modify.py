@@ -5,6 +5,7 @@ from typing import List, Annotated, Optional
 from src.internal.error import ErrorDetails
 from src.internal.success import SuccessMessage
 from src.internal.authmgr import requires_auth
+from src.internal.permissions import UserPermissions
 
 router = APIRouter(prefix="/users", tags=["Users"])
 
@@ -19,7 +20,7 @@ async def modify_user(target: Optional[str], field: str, value: str | int | bool
     if not target:
        target = user.username
     
-    if target != user.username and not user.has_permission("MODIFY_OTHER_USERS"):
+    if target != user.username and not user.has_permission(UserPermissions.MODIFY_OTHER_USERS):
         response.status_code = status.HTTP_403_FORBIDDEN
         return ErrorDetails(error="You do not have permission to modify other users", status_code=status.HTTP_403_FORBIDDEN)
     

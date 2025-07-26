@@ -7,6 +7,7 @@ from src.models.invite import Invite
 from src.internal.authmgr import requires_auth
 from src.internal.error import ErrorDetails
 from src.utils.random import generate_random_string
+from src.internal.permissions import UserPermissions
 
 router = APIRouter(prefix="/invites", tags=["Invites"])
 
@@ -20,7 +21,7 @@ class NewInvitationCreated(BaseModel):
                 status.HTTP_200_OK: {"model": NewInvitationCreated},
                 status.HTTP_400_BAD_REQUEST: {"model": ErrorDetails}
             })
-@requires_auth(permissions_required=["INVITE_CREATE"])
+@requires_auth(permissions_required=[UserPermissions.INVITE_CREATE])
 async def create_new_invite(username: str, response: Response, *,
     user: User):
     
