@@ -10,6 +10,7 @@ async def upgrade(db: BaseDBAsyncClient) -> str:
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "inviter_id" INT NOT NULL REFERENCES "users" ("id") ON DELETE CASCADE
 );
+        ALTER TABLE "users" ADD "ban_history" JSONB NOT NULL;
         ALTER TABLE "users" ADD "twitch_user_id" VARCHAR(255);
         ALTER TABLE "users" RENAME COLUMN "uploads" TO "upload_count";
         CREATE TABLE IF NOT EXISTS "uploads" (
@@ -28,6 +29,7 @@ async def upgrade(db: BaseDBAsyncClient) -> str:
 async def downgrade(db: BaseDBAsyncClient) -> str:
     return """
         ALTER TABLE "users" RENAME COLUMN "upload_count" TO "uploads";
+        ALTER TABLE "users" DROP COLUMN "ban_history";
         ALTER TABLE "users" DROP COLUMN "twitch_user_id";
-        DROP TABLE IF EXISTS "uploads";
-        DROP TABLE IF EXISTS "invites";"""
+        DROP TABLE IF EXISTS "invites";
+        DROP TABLE IF EXISTS "uploads";"""
