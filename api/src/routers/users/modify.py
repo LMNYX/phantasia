@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Response, status, Header
+from fastapi import APIRouter, Response, status
 from src.models.user import User
 from pydantic import BaseModel
 from typing import List, Annotated, Optional
