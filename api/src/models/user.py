@@ -9,6 +9,7 @@ class User(Model):
     access_key = fields.CharField(max_length=255)
     permissions = fields.JSONField(default=['USER_ALL'])
     is_banned = fields.BooleanField(default=False)
+    ban_history = fields.JSONField(default=[])
     badges = fields.JSONField(default=[])
     created_at = fields.DatetimeField(auto_now_add=True)
     updated_at = fields.DatetimeField(auto_now=True)
