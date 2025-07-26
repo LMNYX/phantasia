@@ -6,7 +6,6 @@ from src.models.user import User
 from src.models.invite import Invite
 from src.internal.authmgr import requires_auth
 from src.internal.error import ErrorDetails
-from src.internal.success import DescriptiveSuccessMessage
 from src.utils.random import generate_random_string
 from src.internal.permissions import UserPermissions
 
@@ -40,4 +39,4 @@ async def create_new_invite(invitation_code: str, response: Response):
     new_user = await User.create_with_token(username=username, permissions=["USER_ALL"])
     await Invite.filter(inviation_code=invitation_code).delete()
 
-    return DescriptiveSuccessMessage(success=True, message=InvitationUsed(access_key=new_user[1], username=username))
+    return InvitationUsed(access_key=new_user[1], username=username)
