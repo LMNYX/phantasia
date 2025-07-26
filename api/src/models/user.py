@@ -40,6 +40,10 @@ class User(Model):
     async def exists_by_access_key(cls, access_key: str) -> bool:
         hashed_key = hashlib.sha256(access_key.encode()).hexdigest()
         return await cls.filter(access_key=hashed_key).exists()
+    
+    @classmethod
+    async def exists_by_username(cls, username: str) -> bool:
+        return await cls.filter(username=username).exists()
 
     @classmethod
     async def find_by_id(cls, user_id: int):
