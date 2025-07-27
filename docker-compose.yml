@@ -55,6 +55,7 @@ services:
       - 80:80
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/certificates:/etc/nginx/ssl/
     depends_on:
       - phantasia-frontend
       - phantasia-api
@@ -64,7 +65,6 @@ services:
     container_name: phantasia-minio
     volumes:
       - minio_data:/data
-      - ./nginx/certificates:/etc/nginx/ssl/
     environment:
       <<:
         - *s3-defaults
