@@ -64,6 +64,7 @@ services:
     container_name: phantasia-minio
     volumes:
       - minio_data:/data
+      - ./nginx/certificates:/etc/nginx/ssl/
     environment:
       <<:
         - *s3-defaults
