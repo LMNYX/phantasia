@@ -58,13 +58,9 @@ $ mv uwu.local+2.pem uwu.local+2-key.pem ./nginx/certificates/
 
 Point `uwu.so`, `www.uwu.so`, `i.uwu.so`, and `api.uwu.so` to the server. Any additional domains need to be specified within `default.conf` following the same schema. Having different subdomains will result in unexpected errors.
 
-After pointing domains to the correct server you will have to copy your SSL certificates in `nginx/certificates` and be renamed to `uwu.local+2.pem` (certificate) and `uwu.local+2-key.pem` (private key) respectively.
+After pointing domains to the correct server you will have to copy your SSL certificates in `nginx/certificates` and be renamed to `uwu.local.pem` (certificate) and `uwu.local-key.pem` (private key) respectively.
 
-If you do not have SSL certificate generate it using `mkcert`, like this:
-
-```bash
-$ mkcert uwu.so www.uwu.so api.uwu.so i.uwu.so
-```
+If you do not have SSL certificate generate it using `certbot` and **NOIT** `mkcert` as it's not designed for production environment.
 
 #### Staging
 
