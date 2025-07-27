@@ -4,8 +4,8 @@ Heavily opinionated image and file uploader server, built with Nuxt and FastAPI.
 
 ## Dependencies
 
-1. Node.js + pnpm/npm  
-2. Python  
+1. Node.js 24 + pnpm/npm  
+2. Python 3.13
 3. Docker  
 4. PostgreSQL  
 
@@ -75,6 +75,8 @@ $ mkcert staging.uwu.so api.staging.uwu.so i.staging.uwu.so
 ```
 
 or if you want to host both production and staging on one server please use:
+
+For any exposed domains it is recommended to use `certbot` instead of `mkcert`.
 
 ```bash
 $ mkcert uwu.so www.uwu.so staging.uwu.so api.uwu.so api.staging.uwu.so i.uwu.so i.staging.uwu.so
