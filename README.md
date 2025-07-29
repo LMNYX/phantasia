@@ -60,7 +60,7 @@ Point `uwu.so`, `www.uwu.so`, `i.uwu.so`, and `api.uwu.so` to the server. Any ad
 
 After pointing domains to the correct server you will have to copy your SSL certificates in `nginx/certificates` and be renamed to `uwu.local.pem` (certificate) and `uwu.local-key.pem` (private key) respectively.
 
-If you do not have SSL certificate generate it using `certbot` and **NOIT** `mkcert` as it's not designed for production environment.
+If you do not have SSL certificate generate it using `certbot` and **NOT** `mkcert` as it's not designed for production environment.
 
 #### Staging
 
