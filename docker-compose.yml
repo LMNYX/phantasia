@@ -11,6 +11,10 @@ x-postgres-data: &postgres-defaults
   POSTGRES_PASSWORD: "REPLACETHISWITHSOMETHINGSECURE"
   POSTGRES_DB: "phantasia"
 
+x-grafana-data: &grafana-defaults
+  GF_SECURITY_ADMIN_USER: "admin"
+  GF_SECURITY_ADMIN_PASSWORD: "thisisreallysecurepasswordno"
+
 services:
   phantasia-frontend:
     # image:
@@ -88,7 +92,20 @@ services:
       - 9090:9090
     volumes:
       - prometheus_data:/prometheus
-
+  grafana:
+    image: grafana/grafana:12.4.0
+    container_name: phantasia-grafana
+    restart: always
+    ports:
+      - 3000:3000
+    environment:
+      <<:
+        - *grafana-defaults
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+    depends_on:
+      - loki
 
 volumes:
   db:
