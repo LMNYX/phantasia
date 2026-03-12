@@ -79,8 +79,6 @@ services:
     image: grafana/loki
     container_name: phantasia-loki
     restart: always
-    ports:
-      - 3100:3100
     volumes:
       - ./statistics/loki-config.yml:/etc/loki/loki-config.yml
       - loki_data:/loki
@@ -89,8 +87,6 @@ services:
     image: prom/prometheus
     container_name: phantasia-prometheus
     restart: always
-    ports:
-      - 9090:9090
     volumes:
       - prometheus_data:/prometheus
   
@@ -98,8 +94,6 @@ services:
     image: grafana/grafana:12.4.0
     container_name: phantasia-grafana
     restart: always
-    ports:
-      - 3000:3000
     environment:
       <<:
         - *grafana-defaults
