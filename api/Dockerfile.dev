@@ -1,0 +1,26 @@
+FROM python:3.13-alpine
+
+# Keeps Python from generating .pyc files in the container
+ENV PYTHONDONTWRITEBYTECODE=1
+
+# Turns off buffering for easier container logging
+ENV PYTHONUNBUFFERED=1
+
+# Install pip requirements
+RUN apk add --no-cache build-base postgresql-dev libffi-dev curl
+
+WORKDIR /app
+COPY requirements.txt .
+RUN python -m pip install -r requirements.txt
+
+# In dev, we mount the source code, but we copy it once to have the structure
+COPY . /app
+
+# Creates a non-root user with an explicit UID and adds permission to access the /app folder
+RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
+USER appuser
+
+EXPOSE 4444
+
+# Run with --reload for development
+CMD sh -c "aerich upgrade && uvicorn src.main:app --host 0.0.0.0 --port 4444 --reload"

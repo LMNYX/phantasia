@@ -1,0 +1,117 @@
+x-s3-data: &s3-defaults
+  MINIO_ROOT_USER: "minioadmin"
+  MINIO_ROOT_PASSWORD: "REPLACETHISWITHSOMETHINGSECURE"
+  MINIO_ENDPOINT: "http://minio:9000"
+  S3_BUCKET_NAME: "phantasia"
+  S3_DOMAIN: "i.uwu.local"
+
+x-postgres-data: &postgres-defaults
+  POSTGRES_HOST: "db"
+  POSTGRES_USER: "phantasiauser"
+  POSTGRES_PASSWORD: "REPLACETHISWITHSOMETHINGSECURE"
+  POSTGRES_DB: "phantasia"
+
+x-grafana-data: &grafana-defaults
+  GF_SECURITY_ADMIN_USER: "admin"
+  GF_SECURITY_ADMIN_PASSWORD: "thisisreallysecurepasswordno"
+
+services:
+  phantasia-frontend:
+    build: 
+      context: frontend
+      dockerfile: ./Dockerfile.dev
+    container_name: phantasia-frontend-dev
+    restart: unless-stopped
+    depends_on:
+      - phantasia-api
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.nuxt
+    environment:
+      - NUXT_PUBLIC_API_BASE=https://api.uwu.local
+    
+  phantasia-api:
+    build:
+      context: api
+      dockerfile: ./Dockerfile.dev
+    container_name: phantasia-api-dev
+    restart: unless-stopped
+    depends_on:
+      - db
+      - minio
+    volumes:
+      - ./api:/app
+    environment:
+      <<: 
+        - *s3-defaults
+        - *postgres-defaults
+
+  db:
+    image: postgres:16-alpine
+    container_name: phantasia-db-dev
+    restart: always
+    environment:
+      <<:
+        - *postgres-defaults
+    volumes:
+      - db_dev:/var/lib/postgresql/data
+
+  phantasia-nginx:
+    image: nginx:1.29.0-alpine
+    container_name: phantasia-nginx-dev
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/certificates:/etc/nginx/ssl/
+    depends_on:
+      - phantasia-frontend
+      - phantasia-api
+      - minio
+
+  minio:
+    image: minio/minio
+    container_name: phantasia-minio-dev
+    volumes:
+      - minio_data_dev:/data
+    environment:
+      <<:
+        - *s3-defaults
+    command: server /data
+
+  loki:
+    image: grafana/loki
+    container_name: phantasia-loki-dev
+    restart: always
+    volumes:
+      - ./statistics/loki-config.yml:/etc/loki/loki-config.yml
+      - loki_data_dev:/loki
+
+  prometheus:
+    image: prom/prometheus
+    container_name: phantasia-prometheus-dev
+    restart: always
+    volumes:
+      - prometheus_data_dev:/prometheus
+  
+  grafana:
+    image: grafana/grafana:12.4.0
+    container_name: phantasia-grafana-dev
+    restart: always
+    environment:
+      <<:
+        - *grafana-defaults
+    volumes:
+      - ./statistics/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./statistics/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    depends_on:
+      - loki
+
+volumes:
+  db_dev:
+  minio_data_dev:
+  loki_data_dev:
+  prometheus_data_dev:
