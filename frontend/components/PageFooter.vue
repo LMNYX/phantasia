@@ -16,6 +16,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+import { useApiUrl } from '@/composables/useApiUrl'
 import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 
@@ -49,9 +50,9 @@ const tryLogin = async () => {
     return
   }
 
-  isAuthContentDisabled.value = true
+  const { apiBase } = useApiUrl()
   try {
-    const data = await $fetch<{ authenticated: boolean; user: any }>('https://api.uwu.local/users/authenticate', {
+    const data = await $fetch<{ authenticated: boolean; user: any }>(`${apiBase}/users/authenticate`, {
       params: { access_key: accessKeyInput.value }
     })
 

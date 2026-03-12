@@ -46,6 +46,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+import { useApiUrl } from '@/composables/useApiUrl'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 
@@ -73,8 +74,9 @@ const handleFileUpload = async (event: Event) => {
   const formData = new FormData()
   formData.append('file', file)
 
+  const { apiBase } = useApiUrl()
   try {
-    const response = await $fetch('https://api.uwu.local/uploads/create', {
+    const response = await $fetch(`${apiBase}/uploads/create`, {
       method: 'POST',
       body: formData,
       headers: {
