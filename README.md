@@ -50,8 +50,9 @@ After setting up local domains it is advised to setup local certificates using `
 
 ```bash
 $ mkcert -install
-$ mkcert uwu.local api.uwu.local i.uwu.local
-$ mv uwu.local+2.pem uwu.local+2-key.pem ./nginx/certificates/
+$ mkcert uwu.local api.uwu.local i.uwu.local stats.uwu.local
+$ mv uwu.local+3.pem ./nginx/certificates/uwu.local.pem
+$ mv uwu.local+3-key.pem ./nginx/certificates/uwu.local-key.pem
 ```
 
 #### Production
