@@ -77,7 +77,7 @@ $ mkcert staging.uwu.so api.staging.uwu.so i.staging.uwu.so stats.staging.uwu.so
 
 or if you want to host both production and staging on one server please use:
 
-For any exposed domains it is recommended to use `certbot` instead of `mkcert`.
+**For any exposed domains it is recommended to use `certbot` instead of `mkcert`.**
 
 ```bash
 $ mkcert uwu.so www.uwu.so staging.uwu.so api.uwu.so api.staging.uwu.so i.uwu.so i.staging.uwu.so stats.uwu.so stats.staging.uwu.so
