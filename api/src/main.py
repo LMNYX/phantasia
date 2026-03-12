@@ -4,6 +4,7 @@ import pkgutil
 import os
 import json
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pathlib import Path
 from tortoise.contrib.fastapi import register_tortoise
 from botocore.exceptions import ClientError
@@ -14,6 +15,14 @@ app = FastAPI(
     title="Phantasia API",
     description="",
     version="1.0.0"
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origin_regex=r"https?://(?:.+\.)?uwu\.(?:local|so)(?::\d+)?",
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 BASE_DIR = Path(__file__).resolve().parent
