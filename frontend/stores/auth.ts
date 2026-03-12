@@ -25,5 +25,31 @@ export const useAuthStore = defineStore('auth', () => {
         isLoggedIn.value = false
     }
 
-    return { session, accessKey, isLoggedIn, setSession, logout }
+    async function verifySession() {
+        if (!accessKey.value) {
+            logout()
+            return false
+        }
+
+        const { internalApiBase } = useApiUrl()
+        try {
+            const data = await $fetch<{ authenticated: boolean, user: AuthContext | null }>(`${internalApiBase}/users/authenticate`, {
+                params: { access_key: accessKey.value }
+            })
+
+            if (data.authenticated && data.user && !data.user.is_banned) {
+                setSession(data.user, accessKey.value)
+                return true
+            } else {
+                logout()
+                return false
+            }
+        } catch (error) {
+            console.error('Session verification failed:', error)
+            logout()
+            return false
+        }
+    }
+
+    return { session, accessKey, isLoggedIn, setSession, logout, verifySession }
 })

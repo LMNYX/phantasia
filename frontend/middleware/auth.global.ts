@@ -1,9 +1,12 @@
 import { useAuthStore } from '@/stores/auth'
 
-export default defineNuxtRouteMiddleware((to, from) => {
+export default defineNuxtRouteMiddleware(async (to, from) => {
     const authStore = useAuthStore()
 
-    if (to.path === '/dashboard' && !authStore.isLoggedIn) {
-        return navigateTo('/')
+    if (to.path.startsWith('/dashboard')) {
+        const isValid = await authStore.verifySession()
+        if (!isValid) {
+            return navigateTo('/')
+        }
     }
 })
