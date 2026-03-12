@@ -24,7 +24,7 @@
       <h2>How do I set this up?</h2>
       <p>For ShareX please open your dashboard and download the settings file and import it in ShareX. For Chatterino:</p>
       <p>
-        <ul><li>Request URL: https://uwu.so/api/private/uploads/new</li>
+        <ul><li>Request URL: https://api.uwu.so/uploads/create</li>
         <li>Form field: image</li>
         <li>Extra headers: Authorization: YOURKEY</li>
         <li>Image link: {data.link}</li></ul>
