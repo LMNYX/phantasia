@@ -4,8 +4,8 @@
       <h1>Dashboard</h1>
       <div class="splitter"></div>
       <NuxtLink to="#" :class="{ active: currentInternalPage == 'overview' }">overview</NuxtLink>
-      <NuxtLink to="#" :class="{ active: currentInternalPage == 'uploads' }">uploads</NuxtLink>
-      <NuxtLink to="#" :class="{ active: currentInternalPage == 'admin' }">admin</NuxtLink>
+      <NuxtLink to="/dashboard/uploads" :class="{ active: currentInternalPage == 'uploads' }">uploads</NuxtLink>
+      <NuxtLink to="/dashboard/admin" :class="{ active: currentInternalPage == 'admin' }">admin</NuxtLink>
       <NuxtLink to="#" @click.prevent="handleLogout"><Icon name="material-symbols:logout" /></NuxtLink>
     </div>
     <div class="dashboard-page-content">
@@ -53,6 +53,8 @@ const authStore = useAuthStore()
 const router = useRouter()
 const currentInternalPage = ref('overview')
 const fileInput = ref<HTMLInputElement | null>(null)
+
+console.log(authStore.session?.permissions);
 
 const triggerFileUpload = () => {
   fileInput.value?.click()
